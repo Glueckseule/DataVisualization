@@ -1,16 +1,26 @@
-readTextFile("json_files/saison_16_17.json", function(text){
-    var data = JSON.parse(text);
-    console.log(data);
-});
+var d3 = d3 || {};
+var data;
 
-function readTextFile(file, callback) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
-        if (rawFile.readyState === 4 && rawFile.status == "200") {
-            callback(rawFile.responseText);
-        }
-    }
-    rawFile.send(null);
+function doChart(){
+  "use strict";
+
+  var width = 1000, height = 1000;
+
+  var svg = d3.select(".chart")
+              .attr("width", width)
+              .attr("height", height);
+
+  d3.json("json_files/saison_16_17.json", function(error, json){
+
+    if(error) return console.warn(error);
+
+    data = json;
+
+    console.log(data);
+
+
+  });
+
 }
+
+doChart();
