@@ -1,13 +1,12 @@
 var d3 = d3 || {}
 var data
 var teams = new Array()
-var currentTeam
 
 //HS und AS Torversuche nicht aufs Tor
 //HST und AST haben getroffen oder hätten ohne Torwart getroffen
 //HHW und AHW sind Latten und Pfosten
 
-function doChart(){
+function initialize(){
   "use strict"
 
   var margin = {top: 20, right: 20, bottom: 70, left: 40},
@@ -65,8 +64,12 @@ function makeDropdown(){
                       })
 
   function onChangeTeam(){
-    currentTeam = this.value
+    makeChartForCurrent(this.value)
   }
 }
 
-doChart()
+function makeChartForCurrent(teamName){
+  console.log(teamName)
+}
+
+initialize()
