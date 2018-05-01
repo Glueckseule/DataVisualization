@@ -32,13 +32,12 @@ function doChart(){
     if(error) return console.warn(error);
 
     data = json;
-    console.log(data);
+    console.log(data["saison_16_17"][0]);
 
     extractTeams();
+    makeDropdown();
 
     console.log(teams);
-
-    console.log(data["saison_16_17"][3]["HomeTeam"]);
 
 
   });
@@ -49,6 +48,24 @@ function extractTeams(){
     if(!teams.includes(data["saison_16_17"][i]["AwayTeam"])){
       teams.push(data["saison_16_17"][i]["AwayTeam"]);
     }
+  }
+}
+
+function makeDropdown(){
+  var select = d3.select('.menuDropdown')
+                 .append('select')
+                 .attr('class', 'select')
+                 .on('change', onChangeTeam);
+
+  var options = select.selectAll('option')
+                      .data(teams).enter()
+                      .append('option')
+                      .text(function(d){
+                        return d;
+                      });
+
+  function onChangeTeam(){
+    
   }
 }
 
