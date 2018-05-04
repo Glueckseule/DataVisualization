@@ -1,3 +1,57 @@
+main {
+  padding: 30px;
+}
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+
+  width: 600px;
+  height: 40px;
+  padding-left: 10px;
+  background-color: green;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+
+  box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3);
+  border-radius: 3px;
+
+  outline: none;
+
+  cursor: pointer;
+}
+
+select option {
+  color: black;
+  background-color: white;
+}
+
+.menuDropdown:before {
+  font-family: fontello;
+  content: "\f107";
+  font-size: 20px;
+  position: absolute;
+  left: 610px;
+  top:128px;
+  color: white;
+
+  pointer-events: none;
+}
+
 .menuDropdown {
   margin-bottom: 20px;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
 }

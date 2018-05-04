@@ -2,9 +2,8 @@ var d3 = d3 || {}
 var data
 var teams = new Array()
 
-//HS und AS Torversuche nicht aufs Tor
+//HS und AS Torversuche nicht aufs Tor, also Pfosten oder ähnliches
 //HST und AST haben getroffen oder hätten ohne Torwart getroffen
-//HHW und AHW sind Latten und Pfosten
 
 function initialize(){
   "use strict"
@@ -20,14 +19,36 @@ function initialize(){
 
   var yAxis = d3.axisLeft()
                 .scale(y)
-                .ticks(5)
+                .ticks(3)
 
+  //select svg and set width
   var svg = d3.select(".chart")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.bottom + margin.top)
               .append("g")
               .attr("transform", "translate(" + margin.left + "," + margin.top+")")
 
+  //add axis
+  svg.append("g")
+     .attr("class", "x axis")
+     .attr("transform", "translate(0,"+height+")")
+     .call(xAxis)
+     .selectAll("text")
+     .style("text-anchor", "end")
+     .attr("dx", "-.8em")
+     .attr("dy", "-.55em")
+     .attr("transform", "rotate(-90)")
+
+  svg.append("g")
+     .attr("class", "y axis")
+     .call(yAxis)
+     .append("text")
+     .attr("transform", "rotate(-90)")
+     .attr("y", 5)
+     .attr("dy", ".71em")
+     .style("text-anchor", "end")
+
+  //load the data and call all functions only working with data
   d3.json("json_files/saison_16_17.json", function(error, json){
     if(error) return console.warn(error)
 
@@ -70,6 +91,18 @@ function makeDropdown(){
 
 function makeChartForCurrent(teamName){
   console.log(teamName)
+  // data["saison_16_17"].forEach((e, i) => {
+  //   if(e["AwayTeam"] == teamName){
+  //     var height = d3.nest()
+  //                    .key(e["AwayTeam"]);
+  //                    .rollup(function(d) {
+  //                      return d3.sum(g, function(g){
+  //                        return e["AS"]
+  //                      })
+  //                    })
+  //                    .entries(json)
+  //   }
+  // })
 }
 
 initialize()
