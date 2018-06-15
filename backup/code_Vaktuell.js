@@ -1,6 +1,9 @@
-var d3 = d3 || {}
-var data
-var teams = new Array()
+var d3 = d3 || {},
+    data,
+    teams = new Array,
+    svg,
+    width = 1000,
+    height = 500
 
 //HS und AS Torversuche nicht aufs Tor, also Pfosten oder ähnliches
 //HST und AST haben getroffen oder hätten ohne Torwart getroffen
@@ -8,25 +11,27 @@ var teams = new Array()
 function initialize(){
   "use strict"
 
-  var margin = {top: 20, right: 20, bottom: 70, left: 40},
-      width = 600-margin.left-margin.right, height = 300-margin.top-margin.bottom
+  var margin = {top: 20, right: 20, bottom: 70, left: 40}
 
-  var x = d3.scaleBand().rangeRound([0, width]).padding([.05])
-  var y = d3.scaleLinear().range([height, 0])
+  width = width-margin.left-margin.right
+  height = height-margin.top-margin.bottom
+
+  var x = d3.scaleBand().rangeRound([0, width]).padding([.05]),
+      y = d3.scaleLinear().range([height, 0])
 
   var xAxis = d3.axisBottom()
                 .scale(x)
 
   var yAxis = d3.axisLeft()
                 .scale(y)
-                .ticks(3)
+                .ticks(10)
 
   //select svg and set width
-  var svg = d3.select(".chart")
-              .attr("width", width + margin.left + margin.right)
-              .attr("height", height + margin.bottom + margin.top)
-              .append("g")
-              .attr("transform", "translate(" + margin.left + "," + margin.top+")")
+  svg = d3.select(".chart")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.bottom + margin.top)
+          .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top+")")
 
   //add axis
   svg.append("g")
@@ -51,13 +56,11 @@ function initialize(){
   //load the data and call all functions only working with data
   d3.json("json_files/saison_16_17.json", function(error, json){
     if(error) return console.warn(error)
-
     data = json
-    console.log(data["saison_16_17"][0])
-
     extractTeams()
     makeDropdown()
 
+    //scale range
   })
 }
 
@@ -83,26 +86,40 @@ function makeDropdown(){
                       .attr('value', function(d){
                         return d
                       })
+}
 
-  function onChangeTeam(){
-    makeChartForCurrent(this.value)
-  }
+function onChangeTeam(){
+  makeChartForCurrent(this.value)
 }
 
 function makeChartForCurrent(teamName){
-  console.log(teamName)
-  // data["saison_16_17"].forEach((e, i) => {
-  //   if(e["AwayTeam"] == teamName){
-  //     var height = d3.nest()
-  //                    .key(e["AwayTeam"]);
-  //                    .rollup(function(d) {
-  //                      return d3.sum(g, function(g){
-  //                        return e["AS"]
-  //                      })
-  //                    })
-  //                    .entries(json)
-  //   }
-  // })
+  svg.selectAll(".bar").remove();
+  let allShotValues = [], allShotTargetValues = []
+  data["saison_16_17"].forEach((e, i) => {
+    if(e["AwayTeam"] == teamName){
+      allShotValues.push(e["AS"])
+      allShotTargetValues.push(e["AST"])
+    } else if (e["HomeTeam"] == teamName){
+      allShotValues.push(e["HS"])
+      allShotTargetValues.push(e["HST"])
+    }
+  })
+  let sumShot = d3.sum(allShotValues)
+  let sumShotTarget = d3.sum(allShotTargetValues)
+  let newData = [sumShot, sumShotTarget]
+
+  console.log(newData)
+
+  svg.selectAll(".bar")
+     .data(newData)
+     .enter().append("rect")
+     .attr("class", "bar")
+     .attr("x", function(d, i){ return i*100})
+     .attr("y", 0)
+     .attr("width", "40px")
+     .attr("height", function(d){ return d+"px"})
+     .text(function(d){return d})
+     .attr("fill", "white")
 }
 
 initialize()
