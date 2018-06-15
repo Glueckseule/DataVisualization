@@ -55,7 +55,19 @@ select option {
   shape-rendering: crispEdges;
 }
 
-.bar {
+.shot {
   fill: green;
+}
 
+.target {
+  fill: black;
+}
+
+.highlight {
+  fill: orange;
+}
+
+.value {
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
 }

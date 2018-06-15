@@ -68,7 +68,7 @@ Barchart.Helper = function(){
         }
       }
     }
-    return teams;
+    return teams.sort();
   }
 
   function getMaximum(map){

@@ -16,8 +16,8 @@ Barchart = (function(){
     xScale,
     yScale,
     margin = {top: 20, right:20, bottom: 70, left: 40},
-    width = 1000-margin.left-margin.right,
-    height = 500-margin.top-margin.bottom;
+    width = 1200-margin.left-margin.right,
+    height = 800-margin.top-margin.bottom;
 
   function initialize(){
     helper = new Barchart.Helper();
@@ -73,19 +73,86 @@ Barchart = (function(){
       }
     }
 
-    svg.selectAll(".bar").remove();
+    svg.selectAll(".shot").remove();
+    svg.selectAll(".target").remove();
 
     //for shotbars
-    svg.selectAll(".bar")
+    svg.selectAll(".shot")
        .data(currentDataForThisTeam)
        .enter().append("rect")
-       .attr("class", "bar")
+       .attr("class", "shot")
+       .on("mouseover", onMouseOverShot)
+       .on("mouseout", onMouseOutShot)
        .attr("x", function(d){ return margin.left+xScale(d.saison);})
        .attr("y", function(d){ return margin.top+yScale(d.shot)})
        .attr("width", xScale.bandwidth())
+       .transition()
+       .ease(d3.easeLinear)
+       .duration(400)
+       .delay(function(d,i){
+         return i*50
+       })
        .attr("height", function(d){ return height-yScale(d.shot)+"px"})
-       .text(function(d){return d})
-       .attr("fill", "white")
+
+    svg.selectAll(".target")
+       .data(currentDataForThisTeam)
+       .enter().append("rect")
+       .attr("class", "target")
+       .on("mouseover", onMouseOverTarget)
+       .on("mouseout", onMouseOutTarget)
+       .attr("x", function(d){ return margin.left+xScale(d.saison);})
+       .attr("y", function(d){ return margin.top+yScale(d.target)})
+       .attr("width", xScale.bandwidth())
+       .transition()
+       .ease(d3.easeLinear)
+       .duration(400)
+       .delay(function(d,i){
+         return i*50
+       })
+       .attr("height", function(d){ return height-yScale(d.target)+"px"})
+  }
+
+  function onMouseOverShot(d,i){
+    d3.select(this).attr("class", "highlight");
+    d3.select(this)
+      .transition()
+      .duration(400)
+
+    svg.append("text")
+     .attr("class", "value")
+     .attr("x", function(){ return xScale(d.saison);})
+     .attr("y", function(){ return yScale(d.shot);})
+     .text(function(){ return d.shot})
+     .attr("fill", "black")
+  }
+  function onMouseOverTarget(d,i){
+    d3.select(this).attr("class", "highlight");
+    d3.select(this)
+      .transition()
+      .duration(400)
+
+    svg.append("text")
+     .attr("class", "value")
+     .attr("x", function(){ return xScale(d.saison);})
+     .attr("y", function(){ return yScale(d.target);})
+     .text(function(){ return d.target})
+     .attr("fill", "black")
+  }
+
+  function onMouseOutShot(d,i){
+    d3.select(this)
+      .attr("class", "shot");
+
+    d3.selectAll(".value")
+      .remove()
+  }
+
+  function onMouseOutTarget(d,i){
+    d3.select(this)
+      .attr("class", "target");
+
+    d3.selectAll(".value")
+      .remove()
   }
 
   function makeAxis(){
@@ -94,10 +161,6 @@ Barchart = (function(){
 
     xScale = d3.scaleBand()
               .domain(mapSeasons.seasons.map(function(d){
-                 //  let season = d.saison,
-                 //    newName = season.replace("saison_","");
-                 //  newName = newName.replace("_","/");
-                 // return "Saison "+newName;
                  return d.saison
                }))
                .rangeRound([0, width])
