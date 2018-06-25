@@ -54,6 +54,7 @@ Barchart.Helper = function(){
     return map;
   }
 
+  //make list with all teams and sort alphabetically
   function makeTeams(data){
     var teams = new Array;
     for (var j = 0; j < data.bundesliga.length; j++) {
@@ -71,6 +72,7 @@ Barchart.Helper = function(){
     return teams.sort();
   }
 
+  //get the maximum value so that it can be set for y-axis
   function getMaximum(map){
     var max = 0;
     for (let i = 0; i < map.length; i++) {

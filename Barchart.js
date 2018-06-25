@@ -24,7 +24,7 @@ Barchart = (function(){
 
     //select svg and set width with margin
     svg = d3.select(".chart")
-            .attr("width", width + margin.left + margin.right)
+            .attr("width", "100%")
             .attr("height", height + margin.bottom + margin.top)
     g = svg.append("g")
            .attr("transform", "translate(" + margin.left + "," + margin.top+")")
@@ -73,6 +73,7 @@ Barchart = (function(){
       }
     }
 
+    //remove all bars when new team selection
     svg.selectAll(".shot").remove();
     svg.selectAll(".target").remove();
 
@@ -112,6 +113,7 @@ Barchart = (function(){
        .attr("height", function(d){ return height-yScale(d.target)+"px"})
   }
 
+  //when hovering, make bar orange and show text (for both bars)
   function onMouseOverShot(d,i){
     d3.select(this).attr("class", "highlight");
     d3.select(this)
@@ -122,9 +124,12 @@ Barchart = (function(){
      .attr("class", "value")
      .attr("x", function(){ return xScale(d.saison);})
      .attr("y", function(){ return yScale(d.shot);})
+     .attr("dx", 70)
+     .attr("dy", 50)
      .text(function(){ return d.shot})
      .attr("fill", "black")
   }
+
   function onMouseOverTarget(d,i){
     d3.select(this).attr("class", "highlight");
     d3.select(this)
@@ -135,6 +140,8 @@ Barchart = (function(){
      .attr("class", "value")
      .attr("x", function(){ return xScale(d.saison);})
      .attr("y", function(){ return yScale(d.target);})
+     .attr("dx", 70)
+     .attr("dy", 50)
      .text(function(){ return d.target})
      .attr("fill", "black")
   }
@@ -155,13 +162,14 @@ Barchart = (function(){
       .remove()
   }
 
+  //make the axis for the svg
   function makeAxis(){
     var max = helper.getMaximum(yearValueMap),
       mapSeasons = yearValueMap[0];
 
     xScale = d3.scaleBand()
               .domain(mapSeasons.seasons.map(function(d){
-                 return d.saison
+                return d.saison;
                }))
                .rangeRound([0, width])
                .padding([.05]),
