@@ -42,6 +42,18 @@ select option {
 
 .menuDropdown {
   margin-bottom: 20px;
+  display: inline-flex;
+}
+
+.legend {
+  margin-left: 50px;
+}
+
+.key-dot {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 10px;
 }
 
 .axis {
@@ -57,10 +69,12 @@ select option {
 
 .shot {
   fill: green;
+  background: green;
 }
 
 .target {
   fill: black;
+  background: black;
 }
 
 .highlight {
