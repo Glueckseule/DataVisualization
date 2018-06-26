@@ -29,8 +29,6 @@ Barchart = (function(){
     g = svg.append("g")
            .attr("transform", "translate(" + margin.left + "," + margin.top+")");
 
-    makeLegend();
-
     //load the data and call all functions only working with data
     d3.json("json_files/bundesliga.json", function(error, json){
       if(error){
@@ -184,10 +182,6 @@ Barchart = (function(){
 
     g.append("g")
      .call(d3.axisLeft(yScale))
-  }
-
-  function makeLegend(){
-    
   }
 
   that.init = initialize;
