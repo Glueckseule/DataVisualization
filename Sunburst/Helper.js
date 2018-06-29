@@ -12,7 +12,7 @@ Sunburst.Helper = function(){
         teams.push(current["AwayTeam"])
       }
     }
-    console.log(teams)
+    return teams;
   }
 
   that.extractTeams = extractTeams;

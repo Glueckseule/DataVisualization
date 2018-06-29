@@ -1,0 +1,29 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  grid-gap: 10px;
+}
+
+#selection {
+  border: 2px solid green;
+  width: 100%;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.option {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.option:hover {
+  background-color: green;
+  color: white;
+}

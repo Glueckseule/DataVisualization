@@ -44,8 +44,26 @@ Sunburst = (function(){
         return console.warn(error);
       }
       data = json;
-      teams = helper.extractTeams(data)
+      teams = helper.extractTeams(data);
+      makeTeamSelection();
     })
+  }
+
+  function makeTeamSelection(){
+
+    var select = d3.select("#selection")
+      .selectAll("div")
+      .data(teams).enter()
+      .append("div")
+      .attr("class", "option")
+      .text(function(d){ return d })
+      .attr("value", function(d){ return d })
+      .on("click", onChangeTeam)
+
+  }
+
+  function onChangeTeam(){
+    console.log(this.getAttribute("value"))
   }
 
   that.init = init;
