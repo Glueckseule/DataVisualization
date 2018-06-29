@@ -19,45 +19,68 @@ var Sunburst = Sunburst || {},
 
 Sunburst = (function(){
 
-  var that = {};
+  var that = {},
+    helper,
+    width = 500,
+    height = 500,
+    // radius = Math.min(width, height)/2,
+    color = d3.scaleOrdinal(d3.schemeCategory20b),
+    data,
+    teams;
 
   function init(){
-    console.log("Initialisiere")
+    helper = new Sunburst.Helper();
+
+    //select svg and set width + height to node
+    var g = d3.select("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g")
+      .attr("transform", "translate("+width/2+","+height/2+")");
+
+    //load the data
+    d3.json("saison_16_17.json", function(error, json){
+      if(error){
+        return console.warn(error);
+      }
+      data = json;
+      teams = helper.extractTeams(data)
+    })
   }
 
   that.init = init;
   return that;
 })();
 
-var width = 500,
-  height = 500,
-  radius = Math.min(width, height)/2,
-  color = d3.scaleOrdinal(d3.schemeCategory20b);
+// var width = 500,
+//   height = 500,
+//   radius = Math.min(width, height)/2,
+//   color = d3.scaleOrdinal(d3.schemeCategory20b);
 
-var g = d3.select("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-        .attr("transform", "translate("+width/2+","+height/2+")");
+// var g = d3.select("svg")
+//         .attr("width", width)
+//         .attr("height", height)
+//         .append("g")
+//         .attr("transform", "translate("+width/2+","+height/2+")");
 
-var partition = d3.partition()
-                  .size([2* Math.PI, radius]); //it's a full circle, the distance from middle to outline is radius
-
-var root = d3.hierarchy(nodeData)
-             .sum(function(d){return d.size})
-
-partition(root);
-var arc = d3.arc()
-            .startAngle(function(d){ return d.x0 })
-            .endAngle(function(d){ return d.x1 })
-            .innerRadius(function(d){ return d.y0 })
-            .outerRadius(function(d){ return d.y1 });
-
-g.selectAll("path")
- .data(root.descendants())
- .enter()
- .append("path")
- .attr("display", function(d){ return d.depth ? null : "none" })
- .attr("d", arc)
- .style("stroke", "white")
- .style("fill", function(d){ return color((d.children ? d : d.parent).data.name); });
+// var partition = d3.partition()
+//                   .size([2* Math.PI, radius]); //it's a full circle, the distance from middle to outline is radius
+//
+// var root = d3.hierarchy(nodeData)
+//              .sum(function(d){return d.size})
+//
+// partition(root);
+// var arc = d3.arc()
+//             .startAngle(function(d){ return d.x0 })
+//             .endAngle(function(d){ return d.x1 })
+//             .innerRadius(function(d){ return d.y0 })
+//             .outerRadius(function(d){ return d.y1 });
+//
+// g.selectAll("path")
+//  .data(root.descendants())
+//  .enter()
+//  .append("path")
+//  .attr("display", function(d){ return d.depth ? null : "none" })
+//  .attr("d", arc)
+//  .style("stroke", "white")
+//  .style("fill", function(d){ return color((d.children ? d : d.parent).data.name); });
