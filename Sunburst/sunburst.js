@@ -14,6 +14,21 @@ var nodeData = {
 /*Mit Bundesligadaten: FTR = Full time result (H für Homewin, D für Draw, A für Awayteam)
                        HTR = Half time result (same)*/
 
+var Sunburst = Sunburst || {},
+  d3 = d3 || {};
+
+Sunburst = (function(){
+
+  var that = {};
+
+  function init(){
+    console.log("Initialisiere")
+  }
+
+  that.init = init;
+  return that;
+})();
+
 var width = 500,
   height = 500,
   radius = Math.min(width, height)/2,
