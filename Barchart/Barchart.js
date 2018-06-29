@@ -30,7 +30,7 @@ Barchart = (function(){
            .attr("transform", "translate(" + margin.left + "," + margin.top+")");
 
     //load the data and call all functions only working with data
-    d3.json("json_files/bundesliga.json", function(error, json){
+    d3.json("bundesliga.json", function(error, json){
       if(error){
          return console.warn(error);
       }
