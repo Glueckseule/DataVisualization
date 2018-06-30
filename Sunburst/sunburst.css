@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
 html, body {
   height: 100%;
   margin: 0;
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 main {
@@ -26,7 +29,8 @@ main {
     cursor: pointer;
 }
 
-.option:hover {
+.option:hover,
+.selected {
   background-color: green;
   color: white;
 }

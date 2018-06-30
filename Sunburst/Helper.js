@@ -132,6 +132,13 @@ Sunburst.Helper = function(){
     }
   }
 
+  function markSelected(object){
+    for (var i = 0; i < object.parentElement.childNodes.length; i++) {
+      object.parentElement.childNodes[i].classList.remove("selected")
+    }
+    object.classList.add("selected");
+  }
+
   function getTeamData(team){
     for (var i = 0; i < nodeData.children.length; i++) {
       if(nodeData.children[i].name == team){
@@ -142,6 +149,7 @@ Sunburst.Helper = function(){
 
   that.extractTeams = extractTeams;
   that.organizeData = organizeData;
+  that.markSelected = markSelected;
   that.getTeamData = getTeamData;
   return that;
 }

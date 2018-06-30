@@ -55,6 +55,7 @@ Sunburst = (function(){
   }
 
   function onChangeTeam(){
+    helper.markSelected(this);
     makeChartForTeam(this.getAttribute("value"));
   }
 
@@ -89,7 +90,7 @@ Sunburst = (function(){
         return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
        .attr("dx", "-20") // radius margin
        .attr("dy", ".5em") // rotation align
-       .text(function(d) { return d.parent ? d.data.size+" "+d.data.name : "" });
+       .text(function(d) { return d.parent ? d.data.name : "" });
   }
 
   function computeTextRotation(d) {
