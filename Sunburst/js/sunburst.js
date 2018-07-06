@@ -15,7 +15,6 @@ Sunburst = (function(){
     radius = Math.min(width, height)/2,
     colorArray = ["#FFF","#00A0BF","#BF0A61","#FF8C00","#006A7F","#7F0640","#7F4600"],
     color = d3.scaleOrdinal().range(colorArray),
-    // color = d3.scaleOrdinal(d3.schemeCategory20b),
     data,
     teams;
 
@@ -86,14 +85,13 @@ Sunburst = (function(){
      .attr("d", arc)
      .style("stroke", "white")
      .style("fill", function(d){ return color((d.children ? d : d.parent).data.name); })
-     // .style("fill", function(d){ return color(d.data.name); })
      .on("click", click);
 
     g.selectAll(".node")
       .append("text")
       .attr("transform", function(d) {
         return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
-       .attr("dx", "-20") // radius margin
+       .attr("dx", "-5") // radius margin
        .attr("dy", ".5em") // rotation align
        .attr("value", function(d){ return d.value})
        .text(function(d) { return d.parent ? d.data.name : "" });
