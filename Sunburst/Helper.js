@@ -114,15 +114,15 @@ Sunburst.Helper = function(){
     } else {
       let result = new Array,
         firstObj = {
-          "name": "winHalf",
+          "name": "S",
           "size": winHalf
         },
         secondObj = {
-          "name": "lossHalf",
+          "name": "N",
           "size": lossHalf
         },
         thirdObj = {
-          "name": "drawHalf",
+          "name": "U",
           "size": drawHalf
         };
       result.push(firstObj);

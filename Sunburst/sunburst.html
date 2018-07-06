@@ -9,7 +9,14 @@
 
     <main>
       <div id="selection"></div>
-      <div id="chart"><svg></svg></div>
+      <div id="chart">
+        <div class="legend">
+          <div><span class="key-dot win"></span><span class="description">Endstand Sieg</span></div>
+          <div><span class="key-dot loss"></span>Endstand Niederlage</div>
+          <div><span class="key-dot draw"></span>Endstand Unentschieden</div>
+        </div>
+        <svg></svg>
+      </div>
     </main>
 
     <script src="./lib/d3/d3.js"></script>

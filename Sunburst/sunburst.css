@@ -13,13 +13,18 @@ main {
 }
 
 #selection {
-  border: 2px solid green;
+  border: 2px solid rgb(82, 84, 163);
   margin-top: 20px;
   margin-left: 20px;
 }
 
 #chart {
   padding: 20px;
+}
+
+svg {
+  padding-top: 50px;
+  padding-left: 20px;
 }
 
 .option {
@@ -31,6 +36,36 @@ main {
 
 .option:hover,
 .selected {
-  background-color: green;
+  background-color: rgb(82, 84, 163);
   color: white;
+}
+
+.node:hover {
+  fill: white;
+  cursor: pointer;
+}
+
+.legend div {
+  display: inline;
+}
+
+.key-dot {
+  width: 19px;
+  height: 19px  ;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.description {
+  height: 20px;
+}
+
+.win {
+  background-color: rgb(82, 84, 163);
+}
+.loss {
+  background-color: rgb(107, 110, 207);
+}
+.draw {
+  background-color: rgb(156, 158, 222);
 }
