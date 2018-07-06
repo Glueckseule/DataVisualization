@@ -31,7 +31,8 @@ nav a div {
   text-align: center;
   padding: 10px;
 }
-nav a:hover {
+nav a:hover,
+.nav-selected {
   background-color: #2b5c03;
   color: white;
   opacity: .8;
