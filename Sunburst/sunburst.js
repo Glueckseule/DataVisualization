@@ -13,7 +13,9 @@ Sunburst = (function(){
     g,
     partition,
     radius = Math.min(width, height)/2,
-    color = d3.scaleOrdinal(d3.schemeCategory20b),
+    colorArray = ["#FFF","#00A0BF","#BF0A61","#FF8C00","#006A7F","#7F0640","#7F4600"],
+    color = d3.scaleOrdinal().range(colorArray),
+    // color = d3.scaleOrdinal(d3.schemeCategory20b),
     data,
     teams;
 
@@ -84,6 +86,7 @@ Sunburst = (function(){
      .attr("d", arc)
      .style("stroke", "white")
      .style("fill", function(d){ return color((d.children ? d : d.parent).data.name); })
+     // .style("fill", function(d){ return color(d.data.name); })
      .on("click", click);
 
     g.selectAll(".node")
