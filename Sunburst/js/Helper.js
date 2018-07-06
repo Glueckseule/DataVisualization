@@ -43,7 +43,7 @@ Sunburst.Helper = function(){
   function calcEndWin(team){
     var winObj = {};
     winObj.name = "Win";
-    winObj.children = calcSize("win", team, 2);
+    winObj.children = calcSize("win", team);
 
     return winObj;
   }
@@ -51,7 +51,7 @@ Sunburst.Helper = function(){
   function calcEndLoss(team){
     var lossObj = {};
     lossObj.name = "Loss";
-    lossObj.children = calcSize("loss", team, 2);
+    lossObj.children = calcSize("loss", team);
 
     return lossObj;
   }
@@ -59,14 +59,13 @@ Sunburst.Helper = function(){
   function calcEndDraw(team){
     var drawObj = {};
     drawObj.name = "Draw";
-    drawObj.children = calcSize("draw", team, 2);
+    drawObj.children = calcSize("draw", team);
 
     return drawObj;
   }
 
-  function calcSize(type, team, level){
-    let fullTimeResult = 0,
-      winHalf = 0,
+  function calcSize(type, team){
+    let winHalf = 0,
       lossHalf = 0,
       drawHalf = 0,
       winnerFirst,
@@ -85,51 +84,48 @@ Sunburst.Helper = function(){
 
     for (let i = 0; i < data.saison_16_17.length; i++) {
       if(data.saison_16_17[i]["HomeTeam"] == team && data.saison_16_17[i]["FTR"] == winnerFirst){
-        fullTimeResult++;
-        if(level == 2){
-          if (data.saison_16_17[i]["HTR"] == "H"){
-            winHalf++;
-          } else if (data.saison_16_17[i]["HTR"] == "A"){
-            lossHalf++;
-          } else if (data.saison_16_17[i]["HTR"] == "D"){
-            drawHalf++;
-          }
+        if (data.saison_16_17[i]["HTR"] == "H"){
+          winHalf++;
+        } else if (data.saison_16_17[i]["HTR"] == "A"){
+          lossHalf++;
+        } else if (data.saison_16_17[i]["HTR"] == "D"){
+          drawHalf++;
         }
       } else if (data.saison_16_17[i]["AwayTeam"] == team && data.saison_16_17[i]["FTR"] == winnerSecond){
-        fullTimeResult++;
-        if(level == 2){
-          if (data.saison_16_17[i]["HTR"] == "A"){
-            winHalf++;
-          } else if (data.saison_16_17[i]["HTR"] == "H"){
-            lossHalf++;
-          } else if (data.saison_16_17[i]["HTR"] == "D"){
-            drawHalf++;
-          }
+        if (data.saison_16_17[i]["HTR"] == "A"){
+          winHalf++;
+        } else if (data.saison_16_17[i]["HTR"] == "H"){
+          lossHalf++;
+        } else if (data.saison_16_17[i]["HTR"] == "D"){
+          drawHalf++;
         }
       }
     }
 
-    if(level == 1){
-      return fullTimeResult;
-    } else {
-      let result = new Array,
-        firstObj = {
-          "name": "S",
-          "size": winHalf
-        },
-        secondObj = {
-          "name": "N",
-          "size": lossHalf
-        },
-        thirdObj = {
-          "name": "U",
-          "size": drawHalf
-        };
+    let result = new Array;
+    if(winHalf != 0){
+      let firstObj = {
+        "name": "S",
+        "size": winHalf
+      };
       result.push(firstObj);
-      result.push(secondObj);
-      result.push(thirdObj);
-      return result;
     }
+    if(lossHalf != 0){
+      let secondObj = {
+        "name": "N",
+        "size": lossHalf
+      };
+      result.push(secondObj);
+    }
+    if(drawHalf != 0){
+      let thirdObj = {
+        "name": "U",
+        "size": drawHalf
+      };
+      result.push(thirdObj);
+    }
+
+    return result;
   }
 
   function markSelected(object){
