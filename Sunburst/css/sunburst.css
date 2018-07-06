@@ -16,21 +16,22 @@ main {
   border: 2px solid rgb(82, 84, 163);
   margin-top: 20px;
   margin-left: 20px;
-  background-color: white;
-  opacity: .8;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 #chart {
+  margin: 20px auto;
+  margin-bottom: 0;
   padding: 20px;
   padding-left: 100px;
   padding-right: 100px;
-  background-color: white;
-  opacity: .8;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 svg {
   padding-top: 50px;
-  padding-left: 20px;
+  display: block;
+  margin: auto;
 }
 
 .option {
@@ -51,8 +52,10 @@ svg {
   cursor: pointer;
 }
 
-.legend div {
-  display: inline;
+.legend {
+  display: grid;
+  grid-template-columns:1fr 1fr 1fr;
+  grid-gap: 5px;
 }
 
 .key-dot {
