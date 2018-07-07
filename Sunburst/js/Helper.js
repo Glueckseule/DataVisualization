@@ -42,7 +42,7 @@ Sunburst.Helper = function(){
   //make new Object for ever fulltime result, then push to oneTeam.children
   function calcEndWin(team){
     var winObj = {};
-    winObj.name = "Win";
+    winObj.name = "S";
     winObj.children = calcSize("win", team);
 
     return winObj;
@@ -50,7 +50,7 @@ Sunburst.Helper = function(){
 
   function calcEndLoss(team){
     var lossObj = {};
-    lossObj.name = "Loss";
+    lossObj.name = "N";
     lossObj.children = calcSize("loss", team);
 
     return lossObj;
@@ -58,7 +58,7 @@ Sunburst.Helper = function(){
 
   function calcEndDraw(team){
     var drawObj = {};
-    drawObj.name = "Draw";
+    drawObj.name = "U";
     drawObj.children = calcSize("draw", team);
 
     return drawObj;

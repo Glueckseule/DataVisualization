@@ -31,12 +31,9 @@
       <div id="selection"></div>
       <div id="chart">
         <h2>Vergleich zwischen Halbzeitstand und Endstand</h2>
-        <div class="legend">
-          <div><span class="key-dot win"></span><span class="description">Endstand Sieg</span></div>
-          <div><span class="key-dot loss"></span>Endstand Niederlage</div>
-          <div><span class="key-dot draw"></span>Endstand Unentschieden</div>
-        </div>
+        <div class="legend"></div>
         <svg></svg>
+        <div id="info"></div>
       </div>
     </main>
 
@@ -44,6 +41,17 @@
       <p>Design by: David Krammer, Anne Köthke, Daniela Krapf</p>
     </footer>
 
+    <!-- <script type="text/template" id="percentage-information">
+      <p>Der Verein <%= team %> hat in der Saison 2016/17 34 Spiele gespielt. Davon hat er <%= win%> gewonnen, <%= loss%> verloren und <%= draw%> gingen unentschieden aus.</p>
+    </script> -->
+
+    <script type="text/template" id="legend-template">
+      <div><span class="key-dot win"></span><span class="description">Endstand Sieg <br> Gesamt <%= win %></span></div>
+      <div><span class="key-dot loss"></span>Endstand Niederlage <br> Gesamt <%= loss %></div>
+      <div><span class="key-dot draw"></span>Endstand Unentschieden <br> Gesamt <%= draw %></div>
+    </script>
+
+    <script src="underscore/underscore-min.js"></script>
     <script src="./lib/d3/d3.js"></script>
     <script type="text/javascript" src="js/Sunburst.js"></script>
     <script type="text/javascript" src="js/helper.js"></script>

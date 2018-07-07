@@ -8,6 +8,11 @@ Sunburst = (function(){
 
   var that = {},
     helper,
+    infoDiv = document.querySelector("#info"),
+    legendDiv = document.querySelector(".legend"),
+    // infoTemplate = document.querySelector("#percentage-information").innerHTML,
+    legendTemplate = document.querySelector("#legend-template").innerHTML,
+    infoCircle,
     width = 500,
     height = 500,
     g,
@@ -65,8 +70,11 @@ Sunburst = (function(){
       container.removeChild(container.firstChild);
     }
 
+    infocircle = g.append("circle")
+      .attr("r", "95")
+      .attr("class", "info-circle");
+
     var teamData = helper.getTeamData(team);
-    console.log(teamData)
 
     var root = d3.hierarchy(teamData)
       .sum(function(d){ return d.size });
@@ -74,8 +82,10 @@ Sunburst = (function(){
     var arc = d3.arc()
       .startAngle(function(d){ return d.x0 })
       .endAngle(function(d){ return d.x1 })
-      .innerRadius(function(d){ return d.y0 })
-      .outerRadius(function(d){ return d.y1 });
+      // .innerRadius(function(d){ return d.y0 })
+      // .outerRadius(function(d){ return d.y1 });
+      .innerRadius(radius*0.5)
+      .outerRadius(radius*0.9);
 
     g.selectAll("path")
      .data(partition(root).descendants())
@@ -95,6 +105,8 @@ Sunburst = (function(){
        .attr("dy", ".5em") // rotation align
        .attr("value", function(d){ return d.value})
        .text(function(d) { return d.parent ? d.data.name : "" });
+
+    fillTemplate(teamData);
   }
 
   function computeTextRotation(d) {
@@ -103,7 +115,32 @@ Sunburst = (function(){
   }
 
   function click(){
-    console.log(this.nextSibling.getAttribute("value"))
+    let nodeSelected = document.querySelector(".node-selected");
+    if (nodeSelected != undefined){
+      nodeSelected.classList.remove("node-selected");
+    }
+
+    this.parentNode.classList.add("node-selected");
+    g.select(".infotext").remove();
+
+    g.append("text")
+      .attr("class", "infotext")
+      .text(this.nextSibling.getAttribute("value"))
+      .attr("dx", "-10px")
+      .attr("dy", "10px");
+  }
+
+  function fillTemplate(teamData){
+    let nodes = document.querySelectorAll(".node"),
+      win = nodes[1].childNodes[1].getAttribute("value"),
+      loss = nodes[2].childNodes[1].getAttribute("value"),
+      draw = nodes[3].childNodes[1].getAttribute("value")
+    // console.log(nodes[2].childNodes[1].getAttribute("value"))
+    let chartInfo = {"win": win, "loss": loss, "draw": draw};
+
+    let createEntryTemplate = _.template(legendTemplate);
+
+    legendDiv.innerHTML = createEntryTemplate(chartInfo);
   }
 
   that.init = init;

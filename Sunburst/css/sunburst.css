@@ -47,7 +47,8 @@ svg {
   color: white;
 }
 
-.node:hover {
+.node:hover,
+.node-selected {
   fill: white;
   cursor: pointer;
 }
@@ -56,6 +57,10 @@ svg {
   display: grid;
   grid-template-columns:1fr 1fr 1fr;
   grid-gap: 5px;
+}
+
+.legend div {
+  display: inline-flex;
 }
 
 .key-dot {
@@ -77,4 +82,12 @@ svg {
 }
 .draw {
   background-color: rgb(255, 140, 0);
+}
+
+.info-circle {
+  fill: white;
+}
+
+.infotext {
+  font-size: 30px;
 }
