@@ -143,9 +143,32 @@ Sunburst.Helper = function(){
     }
   }
 
+  function fillSpaceholders(teamData){
+    let nodes = document.querySelectorAll(".node"),
+      win = nodes[1].childNodes[1].getAttribute("value"),
+      loss = nodes[2].childNodes[1].getAttribute("value"),
+      draw = nodes[3].childNodes[1].getAttribute("value"),
+      gamesPlayed = parseInt(win)+parseInt(loss)+parseInt(draw),
+      winValue = document.querySelector(".description-win"),
+      lossValue = document.querySelector(".description-loss"),
+      drawValue = document.querySelector(".description-draw"),
+      divDescription = document.getElementById("info");
+
+    winValue.innerHTML = "<span class='key-dot win'></span><span>Endstand Sieg <br> Gesamt "+win+"</span>";
+    lossValue.innerHTML = "<span class='key-dot loss'></span><span>Endstand Niederlage <br> Gesamt "+loss+"</span>";
+    drawValue.innerHTML = "<span class='key-dot draw'></span><span>Endstand Unentschieden <br> Gesamt "+draw+"</span>";
+
+    winPerc = Math.round((win/gamesPlayed)*100);
+    lossPerc = Math.round((loss/gamesPlayed)*100);
+    drawPerc = Math.round((draw/gamesPlayed)*100);
+
+    divDescription.innerHTML = 'Der '+teamData.name+' hat in der Saison 2016/17 '+gamesPlayed+' Spiele gespielt. Davon hat er letztendlich '+winPerc+'% gewonnen, '+lossPerc+'% verloren und '+drawPerc+'% unentschieden gespielt (gerundet). Die Grafik zeigt, wie die jeweiligen Endstände noch zur Halbzeit ausgesehen haben (S = zur Halbzeit vorne, U = Gleichstand, N = zur Halbzeit hinten)';
+  }
+
   that.extractTeams = extractTeams;
   that.organizeData = organizeData;
   that.markSelected = markSelected;
   that.getTeamData = getTeamData;
+  that.fillSpaceholders = fillSpaceholders;
   return that;
 }

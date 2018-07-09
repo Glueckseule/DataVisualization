@@ -105,7 +105,7 @@ Sunburst = (function(){
        .attr("value", function(d){ return d.value})
        .text(function(d) { return d.parent ? d.data.name : "" });
 
-    fillTemplate(teamData);
+    helper.fillSpaceholders(teamData);
   }
 
   function computeTextRotation(d) {
@@ -127,20 +127,6 @@ Sunburst = (function(){
       .text(this.nextSibling.getAttribute("value"))
       .attr("dx", "-10px")
       .attr("dy", "10px");
-  }
-
-  function fillTemplate(teamData){
-    let nodes = document.querySelectorAll(".node"),
-      win = nodes[1].childNodes[1].getAttribute("value"),
-      loss = nodes[2].childNodes[1].getAttribute("value"),
-      draw = nodes[3].childNodes[1].getAttribute("value"),
-      winValue = document.querySelector(".description-win"),
-      lossValue = document.querySelector(".description-loss"),
-      drawValue = document.querySelector(".description-draw");
-
-    winValue.innerHTML = "<span class='key-dot win'></span><span>Endstand Sieg <br> Gesamt "+win+"</span>";
-    lossValue.innerHTML = "<span class='key-dot loss'></span><span>Endstand Sieg <br> Gesamt "+loss+"</span>";
-    drawValue.innerHTML = "<span class='key-dot draw'></span><span>Endstand Sieg <br> Gesamt "+draw+"</span>";
   }
 
   that.init = init;

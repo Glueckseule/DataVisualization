@@ -20,6 +20,7 @@ main {
 }
 
 #chart {
+  border: 2px solid rgb(82, 84, 163);
   margin: 20px auto;
   margin-bottom: 0;
   padding: 20px;
@@ -61,6 +62,7 @@ svg {
 
 .legend div {
   display: inline-flex;
+  margin: 0 auto;
 }
 
 .key-dot {
