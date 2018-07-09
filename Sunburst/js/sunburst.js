@@ -11,7 +11,6 @@ Sunburst = (function(){
     infoDiv = document.querySelector("#info"),
     legendDiv = document.querySelector(".legend"),
     // infoTemplate = document.querySelector("#percentage-information").innerHTML,
-    legendTemplate = document.querySelector("#legend-template").innerHTML,
     infoCircle,
     width = 500,
     height = 500,
