@@ -134,13 +134,14 @@ Sunburst = (function(){
     let nodes = document.querySelectorAll(".node"),
       win = nodes[1].childNodes[1].getAttribute("value"),
       loss = nodes[2].childNodes[1].getAttribute("value"),
-      draw = nodes[3].childNodes[1].getAttribute("value")
-    // console.log(nodes[2].childNodes[1].getAttribute("value"))
-    let chartInfo = {"win": win, "loss": loss, "draw": draw};
+      draw = nodes[3].childNodes[1].getAttribute("value"),
+      winValue = document.querySelector(".description-win"),
+      lossValue = document.querySelector(".description-loss"),
+      drawValue = document.querySelector(".description-draw");
 
-    let createEntryTemplate = _.template(legendTemplate);
-
-    legendDiv.innerHTML = createEntryTemplate(chartInfo);
+    winValue.innerHTML = "<span class='key-dot win'></span><span>Endstand Sieg <br> Gesamt "+win+"</span>";
+    lossValue.innerHTML = "<span class='key-dot loss'></span><span>Endstand Sieg <br> Gesamt "+loss+"</span>";
+    drawValue.innerHTML = "<span class='key-dot draw'></span><span>Endstand Sieg <br> Gesamt "+draw+"</span>";
   }
 
   that.init = init;
