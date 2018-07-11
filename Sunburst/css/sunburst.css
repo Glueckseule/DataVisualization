@@ -26,6 +26,7 @@ main {
   padding: 20px;
   padding-left: 100px;
   padding-right: 100px;
+  max-width: 900px;
   background-color: rgba(255, 255, 255, 0.8);
 }
 

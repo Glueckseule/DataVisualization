@@ -81,8 +81,7 @@ Sunburst = (function(){
     var arc = d3.arc()
       .startAngle(function(d){ return d.x0 })
       .endAngle(function(d){ return d.x1 })
-      // .innerRadius(function(d){ return d.y0 })
-      // .outerRadius(function(d){ return d.y1 });
+
       .innerRadius(radius*0.5)
       .outerRadius(radius*0.9);
 
