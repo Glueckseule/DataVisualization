@@ -7,9 +7,6 @@ html, body {
 }
 
 main {
-  display: grid;
-  grid-template-columns: 3fr 7fr;
-  grid-gap: 10px;
 }
 
 #selection {
@@ -21,12 +18,11 @@ main {
 
 #chart {
   border: 2px solid rgb(82, 84, 163);
-  margin: 20px auto;
   margin-bottom: 0;
+  margin-top: 20px;
   padding: 20px;
   padding-left: 100px;
   padding-right: 100px;
-  max-width: 900px;
   background-color: rgba(255, 255, 255, 0.8);
 }
 
@@ -34,6 +30,13 @@ svg {
   padding-top: 50px;
   display: block;
   margin: auto;
+}
+
+.content {
+  margin: auto;
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  grid-gap: 20px;
 }
 
 .option {

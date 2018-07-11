@@ -16,15 +16,15 @@ Barchart = (function(){
     xScale,
     yScale,
     margin = {top: 20, right:20, bottom: 70, left: 40},
-    width = 1200-margin.left-margin.right,
-    height = 800-margin.top-margin.bottom;
+    width = 1000-margin.left-margin.right,
+    height = 600-margin.top-margin.bottom;
 
   function initialize(){
     helper = new Barchart.Helper();
 
     //select svg and set width with margin
     svg = d3.select(".chart")
-            .attr("width", "100%")
+            .attr("width", width+ margin.left + margin.right)
             .attr("height", height + margin.bottom + margin.top);
     g = svg.append("g")
            .attr("transform", "translate(" + margin.left + "," + margin.top+")");

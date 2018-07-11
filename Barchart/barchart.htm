@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Bundesliga in bunt</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/barchart.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <header>
+      <a href="index.htm"><img id="logo" src="img/logo.png" alt="Fußball-Logo"></a>
+      <div class="">
+        <h1>Bundesliga in bunt</h1>
+        <p>Datenvisualisierung mit d3</p>
+      </div>
+    </header>
+
+    <nav>
+      <a href="bubble.htm"><div>Fouls und Karten</div></a>
+      <a href="treemap.htm"><div>Heim- und Auswärtsstärke</div></a>
+      <a href="../Sunburst/sunburst.htm"><div>Halbzeit- vs. Endergebnis</div></a>
+      <a class="nav-selected" href="barchart.htm"><div>Schüsse vs. Torschüsse</div></a>
+      <a href="path.htm"><div>Spielerwanderung</div></a>
+    </nav>
+
+    <main>
+
+      <div id="chart">
+        <h2>Verhältnis Schüsse zu Schüsse aufs Tor</h2>
+        <div class="info-round">
+          <div class="menuDropdown">
+            <select class="select">
+              <option value="" selected disabled hidden>Wähle hier ein Team aus</option>
+            </select>
+          </div>
+          <div class="legend">
+            <div><span class="key-dot shot"></span>Schüsse Richtung Tor</div>
+            <div><span class="key-dot target"></span>Schüsse aufs Tor</div>
+          </div>
+        </div>
+
+        <svg class="chart"></svg>
+      </div>
+
+
+    </main>
+
+    <footer>
+      <p>Design by: David Krammer, Anne Köthke, Daniela Krapf</p>
+    </footer>
+
+    <script src="./lib/d3/d3.js"></script>
+    <script type="text/javascript" src="Barchart.js"></script>
+    <script type="text/javascript" src="Helper.js"></script>
+    <script>Barchart.init()</script>
+
+  </body>
+
+</html>
