@@ -26,6 +26,14 @@ main {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
+#info {
+  background-color: white;
+  font-size: 20px;
+  text-align: justify;
+  padding: 5px;
+  border: 2px solid rgb(82, 84, 163);
+}
+
 svg {
   padding-top: 50px;
   display: block;
@@ -55,7 +63,6 @@ svg {
 .node:hover,
 .node-selected {
   fill: white;
-  cursor: pointer;
 }
 
 .legend {
@@ -96,4 +103,8 @@ svg {
 
 .infotext {
   font-size: 30px;
+}
+
+.hide {
+  display: none;
 }

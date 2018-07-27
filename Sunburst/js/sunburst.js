@@ -1,6 +1,3 @@
-/*Mit Bundesligadaten: FTR = Full time result (H für Homewin, D für Draw, A für Awayteam)
-                       HTR = Half time result (same)*/
-
 var Sunburst = Sunburst || {},
   d3 = d3 || {};
 
@@ -10,7 +7,6 @@ Sunburst = (function(){
     helper,
     infoDiv = document.querySelector("#info"),
     legendDiv = document.querySelector(".legend"),
-    // infoTemplate = document.querySelector("#percentage-information").innerHTML,
     infoCircle,
     width = 500,
     height = 500,
@@ -47,6 +43,7 @@ Sunburst = (function(){
     })
   }
 
+  //make the menu on the left side to select team to be displayed and set listener
   function makeTeamSelection(){
     var select = d3.select("#selection")
       .selectAll("div")
@@ -63,6 +60,7 @@ Sunburst = (function(){
     makeChartForTeam(this.getAttribute("value"));
   }
 
+  //when team is clicked on, draw the data, but first remove all data from container
   function makeChartForTeam(team){
     var container = document.querySelector("svg g");
     while (container.firstChild) {
@@ -88,12 +86,13 @@ Sunburst = (function(){
     g.selectAll("path")
      .data(partition(root).descendants())
      .enter()
-     .append("g").attr("class", "node").append("path")
+     .append("g")
+     .on("mouseover", handleMouseover)
+     .attr("class", "node").append("path")
      .attr("display", function(d){ return d.depth ? null : "none" })
      .attr("d", arc)
      .style("stroke", "white")
-     .style("fill", function(d){ return color((d.children ? d : d.parent).data.name); })
-     .on("click", click);
+     .style("fill", function(d){ return color((d.children ? d : d.parent).data.name); });
 
     g.selectAll(".node")
       .append("text")
@@ -112,19 +111,24 @@ Sunburst = (function(){
     return (angle < 120 || angle > 270) ? angle : angle + 180;
   }
 
-  function click(){
-    let nodeSelected = document.querySelector(".node-selected");
+  function handleMouseover(){
+    let nodeSelected = document.querySelector(".node-selected"),
+      nodeValue = this.children[1].getAttribute("value");
+
     if (nodeSelected != undefined){
       nodeSelected.classList.remove("node-selected");
     }
 
-    this.parentNode.classList.add("node-selected");
+    this.classList.add("node-selected");
     g.select(".infotext").remove();
 
     g.append("text")
       .attr("class", "infotext")
-      .text(this.nextSibling.getAttribute("value"))
-      .attr("dx", "-10px")
+      .text(nodeValue)
+      .attr("dx", function(){
+        if (nodeValue < 10) { return "-8px" }
+        if (nodeValue >= 10) { return "-17px"}
+      })
       .attr("dy", "10px");
   }
 
