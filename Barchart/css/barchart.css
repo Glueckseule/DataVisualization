@@ -31,6 +31,12 @@ select option {
   background-color: white;
 }
 
+#chart {
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+}
+
 .menuDropdown:before {
   content: "\25BC";
   font-size: 20px;
@@ -67,6 +73,10 @@ select option {
   font: 10px sans-serif;
 }
 
+.axis-label {
+  font-size: 15px;
+}
+
 .axis path,
 .axis line {
   fill: none;
@@ -91,4 +101,9 @@ select option {
 .value {
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
+}
+
+.info-round {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
 }

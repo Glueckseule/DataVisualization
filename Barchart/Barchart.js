@@ -178,10 +178,27 @@ Barchart = (function(){
                .range([height, 0]);
     g.append("g")
      .attr("transform", "translate(0,"+height+")")
+     .attr("class", "axis-label")
      .call(d3.axisBottom(xScale));
 
     g.append("g")
+     .attr("class", "axis-label")
      .call(d3.axisLeft(yScale))
+
+    svg.append("text")
+      .attr("transform", "translate(" + (width/2) + " ," + (height+margin.top+margin.bottom) + ")")
+      .attr("font-size", "20px")
+      .style("text-anchor", "middle")
+      .text("Saison")
+
+    svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Anzahl")
+
   }
 
   that.init = initialize;
