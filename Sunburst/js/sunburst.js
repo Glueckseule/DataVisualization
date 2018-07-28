@@ -67,6 +67,7 @@ Sunburst = (function(){
       container.removeChild(container.firstChild);
     }
 
+    //circle in the middle to display value of each segment
     infocircle = g.append("circle")
       .attr("r", "95")
       .attr("class", "info-circle");
@@ -79,22 +80,25 @@ Sunburst = (function(){
     var arc = d3.arc()
       .startAngle(function(d){ return d.x0 })
       .endAngle(function(d){ return d.x1 })
-
-      .innerRadius(radius*0.5)
-      .outerRadius(radius*0.9);
+      .innerRadius(function(d){ return d.y0 })
+      .outerRadius(function(d){ return d.y1 });
 
     g.selectAll("path")
      .data(partition(root).descendants())
      .enter()
      .append("g")
-     .on("mouseover", handleMouseover)
-     .attr("class", "node").append("path")
+     .attr("endResult", function(d){ return d.children ? "true" : "false"; })
+     .attr("class", "node")
+     .attr("value", function(d){ return d.value})
+     .append("path")
      .attr("display", function(d){ return d.depth ? null : "none" })
      .attr("d", arc)
      .style("stroke", "white")
      .style("fill", function(d){ return color((d.children ? d : d.parent).data.name); });
 
-    g.selectAll(".node")
+    //select all outer segments and make them hoverable + write the text on them
+    g.selectAll("[endResult=false]")
+      .on("mouseover", handleMouseover)
       .append("text")
       .attr("transform", function(d) {
         return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
@@ -103,6 +107,7 @@ Sunburst = (function(){
        .attr("value", function(d){ return d.value})
        .text(function(d) { return d.parent ? d.data.name : "" });
 
+    //fill the infobox text
     helper.fillSpaceholders(teamData);
   }
 

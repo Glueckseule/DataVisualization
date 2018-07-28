@@ -145,9 +145,9 @@ Sunburst.Helper = function(){
 
   function fillSpaceholders(teamData){
     let nodes = document.querySelectorAll(".node"),
-      win = nodes[1].childNodes[1].getAttribute("value"),
-      loss = nodes[2].childNodes[1].getAttribute("value"),
-      draw = nodes[3].childNodes[1].getAttribute("value"),
+      win = nodes[1].getAttribute("value"),
+      loss = nodes[2].getAttribute("value"),
+      draw = nodes[3].getAttribute("value"),
       gamesPlayed = parseInt(win)+parseInt(loss)+parseInt(draw),
       winValue = document.querySelector(".description-win"),
       lossValue = document.querySelector(".description-loss"),
@@ -162,7 +162,6 @@ Sunburst.Helper = function(){
     lossPerc = Math.round((loss/gamesPlayed)*100);
     drawPerc = Math.round((draw/gamesPlayed)*100);
 
-    //Der Verein x hat von seinen 34 Spielen in der Saison y/z a% der Spiele gewonnen, b% verloren, [...]
     divDescription.classList.remove("hide");
     divDescription.innerHTML = 'Der Verein '+teamData.name+' hat von seinen 34 Spielen in der Saison 2016/17 '+winPerc+'% der Spiele gewonnen, '+lossPerc+'% verloren und '+drawPerc+'% unentschieden gespielt (gerundet). <br>Die Grafik zeigt, wie die jeweiligen Endstände noch zur Halbzeit ausgesehen haben (<strong>S</strong>&nbsp;=&nbsp;zur&nbsp;Halbzeit&nbsp;vorne, <strong>U</strong>&nbsp;=&nbsp;Gleichstand, <strong>N</strong>&nbsp;=&nbsp;zur&nbsp;Halbzeit&nbsp;hinten)';
   }
