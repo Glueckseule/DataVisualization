@@ -32,6 +32,7 @@ main {
   text-align: justify;
   padding: 5px;
   border: 2px solid rgb(82, 84, 163);
+  margin-top: 20px;
 }
 
 svg {
@@ -60,9 +61,9 @@ svg {
   color: white;
 }
 
-.node:hover,
 .node-selected {
   fill: white;
+  opacity: .8;
 }
 
 .legend {
@@ -106,5 +107,5 @@ svg {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
