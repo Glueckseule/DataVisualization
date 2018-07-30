@@ -127,20 +127,20 @@ Sunburst.Helper = function(){
 
     return result;
   }
-
-  function markSelected(object){
-    for (var i = 0; i < object.parentElement.childNodes.length; i++) {
-      object.parentElement.childNodes[i].classList.remove("selected")
-    }
-    object.classList.add("selected");
-  }
-
+  
   function getTeamData(team){
     for (var i = 0; i < nodeData.children.length; i++) {
       if(nodeData.children[i].name == team){
         return nodeData.children[i];
       }
     }
+  }
+
+  function markSelected(object){
+    for (var i = 0; i < object.parentElement.childNodes.length; i++) {
+      object.parentElement.childNodes[i].classList.remove("selected")
+    }
+    object.classList.add("selected");
   }
 
   function fillSpaceholders(teamData){

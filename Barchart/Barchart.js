@@ -36,8 +36,8 @@ Barchart = (function(){
       }
       data = json;
       teams = helper.extractTeams(data);
-      makeDropdown();
       yearValueMap = helper.makeMap(teams, data);
+      makeDropdown();
       makeAxis();
     })
   }
@@ -176,6 +176,7 @@ Barchart = (function(){
     yScale = d3.scaleLinear()
                .domain([0, max])
                .range([height, 0]);
+               
     g.append("g")
      .attr("transform", "translate(0,"+height+")")
      .attr("class", "axis-label")
@@ -190,7 +191,6 @@ Barchart = (function(){
       .attr("font-size", "20px")
       .style("text-anchor", "middle")
       .text("Saison")
-
   }
 
   that.init = initialize;
